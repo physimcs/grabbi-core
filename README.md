@@ -7,4 +7,4 @@ This is more of an exercise in 'can it be done' rather than 'is it the most effi
 
 # Progress
 This project is a work in progress, but here are some of the key achievements so far:
-* Web Scraping: Implemented a combination of BeautifulSoup and Selenium to scrape internal links from Wikipedia articles. BeautifulSoup is used to parse the HTML and extract all internal links, while Selenium is used to click on the links (like one would in the real Wikipedia game).
+* Web Scraping
