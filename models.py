@@ -1,16 +1,17 @@
-from transformers import pipeline
+from sentence_transformers import SentenceTransformer, util
 
-# Initialize the zero-shot classification pipeline
-classifier = pipeline('zero-shot-classification', model='roberta-large-mnli')
+# Load a pre-trained RoBERTa model for sentence embeddings
+model = SentenceTransformer('stsb-roberta-large')
 
-# Text you want to classify
-sequence_to_classify = "one day I will see the world"
+article_1 = "Quantum mechanics is a fundamental theory in physics that describes nature at the smallest scales."
+article_2 = "The study of quantum physics explores the behavior of particles at the atomic and subatomic levels."
 
-# Candidate labels to classify against
-candidate_labels = ['travel', 'cooking', 'dancing']
+# Generate embeddings for the articles
+embedding_1 = model.encode(article_1, convert_to_tensor=True)
+embedding_2 = model.encode(article_2, convert_to_tensor=True)
 
-# Get classification results
-result = classifier(sequence_to_classify, candidate_labels)
+# Compute cosine similarity
+cosine_similarity = util.cos_sim(embedding_1, embedding_2)
 
-# Print the result
-print(result)
+# Print similarity score
+print(f"Semantic similarity: {cosine_similarity.item():.4f}")

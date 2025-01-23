@@ -1,2 +1,1 @@
-# Ignore chromedriver.exe
-chromedriver64/
+__pycache__/
