@@ -35,12 +35,24 @@ class WikiScraper:
                     if section:
                         section.decompose()
 
-            # Find all internal links
+            # Exclude links in specific header containers with class "vector-header-container"
+            header_container = soup.find_all(class_='vector-header-container')
+            for container in header_container:
+                for link in container.find_all('a', href=True):
+                    link.decompose()  # Remove link from header container
+
+            # Find all internal links (footer links will be excluded in the list comprehension)
             links = soup.find_all('a', href=True)
             internal_links = [
                 'https://en.wikipedia.org' + link['href']
                 for link in links
-                if link['href'].startswith('/wiki/') and 'reference' not in link['href']
+                if link['href'].startswith('/wiki/')
+                and 'reference' not in link['href']
+                and not link['href'].startswith('/wiki/Wikipedia:')
+                and not link['href'].startswith('/wiki/Special:')
+                and not link['href'].startswith('/wiki/Category:')
+                and not link['href'].startswith('/wiki/Talk:')
+                and not link['href'].startswith('/wiki/Help:')
             ]
 
             print(f"Found {len(internal_links)} internal links.")
