@@ -1,4 +1,5 @@
 from scraper import WikiScraper
 
-internal_links = WikiScraper.get_internal_links("https://en.wikipedia.org/wiki/Comparison_of_programming_languages#General_comparison")
+scraper = WikiScraper()
+internal_links = scraper.get_internal_links("https://en.wikipedia.org/wiki/Shark")
 print(internal_links)
