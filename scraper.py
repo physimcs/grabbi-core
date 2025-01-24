@@ -7,6 +7,7 @@ class WikiScraper:
         pass
 
     def is_valid_link(self, href):
+        # Return link if link starts with wiki and not...
         return (href.startswith('/wiki/') and
                 'reference' not in href and
                 not href.startswith('/wiki/Wikipedia:') and
@@ -29,12 +30,10 @@ class WikiScraper:
             soup = BeautifulSoup(response.text, 'html.parser')
 
             # Exclude reference sections
-            refs = soup.find_all(class_='reflist reflist-columns references-column-width')
-            for ref in refs:
-                ref.decompose()
+            [ref.decompose() for ref in soup.find_all(class_='reflist reflist-columns references-column-width')]
 
             # Exclude sections based on headers
-            self.decompose_sections(soup, ['Further reading', 'External links'])
+            self.decompose_sections(soup, ['Further reading', 'External links', ''])
 
             # Exclude links in specific header containers
             header_container = soup.find_all(class_='vector-header-container')
