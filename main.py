@@ -19,6 +19,6 @@ print(f"Cosine Similarity: {similarity_score}")
 
 helper = HelperFunctions()
 
-cut_link = helper.get_article_name("https://en.wikipedia.org/wiki/Shark")
-cut_normalized_link = helper.normalize_article(cut_link)
-print(cut_normalized_link)
+links = ["https://en.wikipedia.org/wiki/Shark", "https://en.wikipedia.org/wiki/Royal_Navy"]
+linktionary = helper.link_name_pair(links)
+print(linktionary)
